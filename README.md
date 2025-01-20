@@ -1,5 +1,5 @@
 # LastUpdated
-[![test](https://github.com/Kaz-stark/robosys2024/actions/workflows/test.yml/badge.svg)](https://github.com/Kaz-stark/robosys2024/actions/workflows/test.yml)  
+[![test](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml/badge.svg)](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml)  
 
 ## 概要
 - LastUpdatedは課題2のために作られたコマンドです。  
