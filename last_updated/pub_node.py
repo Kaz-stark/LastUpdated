@@ -6,66 +6,84 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
+import platform
 
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
-class FileMonitorNode(Node):
-    def __init__(self, target_path: str):
-        super().__init__('file_monitor_node')
+class LineUpdateMonitorNode(Node):
+    def __init__(self):
+        super().__init__('line_update_monitor_node')
         
         # パブリッシャーの設定
         self.publisher = self.create_publisher(
             String,
-            'file_last_modified',
+            'line_last_update',
             10
         )
         
-        # 監視対象のパスを設定
-        self.target_path = Path(target_path)
-        if not self.target_path.exists():
-            self.get_logger().error(f'Path does not exist: {target_path}')
+        # LINEアプリケーションのパスを設定
+        self.line_path = self._get_line_path()
+        if not self.line_path.exists():
+            self.get_logger().error(f'LINE application not found at: {self.line_path}')
             return
             
         # タイマーの設定（1秒間隔でチェック）
         self.timer = self.create_timer(1.0, self.timer_callback)
         self.last_modified = None
+        self.get_logger().info(f'Monitoring LINE updates at: {self.line_path}')
+    
+    def _get_line_path(self) -> Path:
+        """OneDriveのパスからLINEアプリケーションのパスを返す"""
+        home = Path.home()
         
-        self.get_logger().info(f'Monitoring file: {self.target_path}')
+        # OneDriveパスの構築
+        onedrive_path = home / 'OneDrive' / '和也ー個人用' / 'デスクトップ' / 'LINE'
         
+        # パスの存在確認とデバッグ情報の出力
+        self.get_logger().info(f'Checking LINE at: {onedrive_path}')
+        
+        if onedrive_path.exists():
+            return onedrive_path
+        
+        # パスが見つからない場合、親ディレクトリの内容を確認（デバッグ用）
+        parent_dir = onedrive_path.parent
+        if parent_dir.exists():
+            self.get_logger().info(f'Contents of {parent_dir}:')
+            for file in parent_dir.glob('*'):
+                self.get_logger().info(f'Found: {file.name}')
+        
+        return onedrive_path
+    
     def timer_callback(self):
         try:
             # 最終更新日時を取得
             current_modified = datetime.fromtimestamp(
-                os.path.getmtime(self.target_path)
+                os.path.getmtime(self.line_path)
             )
             
             # 前回と異なる場合のみパブリッシュ
             if self.last_modified != current_modified:
                 msg = String()
-                msg.data = current_modified.isoformat()
+                msg.data = (
+                    f'LINE Update Detected!\n'
+                    f'Last Modified: {current_modified.isoformat()}\n'
+                    f'Location: {self.line_path}'
+                )
                 self.publisher.publish(msg)
                 self.last_modified = current_modified
-                
-                self.get_logger().info(f'Published last modified: {msg.data}')
-                
+                self.get_logger().info(f'Published LINE update: {current_modified.isoformat()}')
+        
         except Exception as e:
-            self.get_logger().error(f'Error checking file: {str(e)}')
+            self.get_logger().error(f'Error checking LINE updates: {str(e)}')
 
 def main(args=None):
     # ROS2の初期化
     rclpy.init(args=args)
     
-    # コマンドライン引数からファイルパスを取得
-    if len(sys.argv) < 2:
-        print("Usage: ros2 run last_updated pub_node <path_to_file>")
-        return
-    
-    file_path = sys.argv[1]
-    
     # ノードの作成と実行
-    node = FileMonitorNode(file_path)
+    node = LineUpdateMonitorNode()
     
     try:
         rclpy.spin(node)
