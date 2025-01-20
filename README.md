@@ -1,4 +1,5 @@
 # LastUpdated
+[![test](https://github.com/Kaz-stark/robosys2024/actions/workflows/test.yml/badge.svg)](https://github.com/Kaz-stark/robosys2024/actions/workflows/test.yml)  
 
 ## 概要
 - LastUpdatedは課題2のために作られたコマンドです。  
@@ -38,7 +39,7 @@ Location: /path/to/your/LINE
 - © 2025 Kazuya Ochiai  
 
 
-# 使用させていただいたコンテナ  
+## 使用させていただいたコンテナ  
 - [ryuichiueda/ubuntu22.04-ros2:latest](https://hub.docker.com/r/ryuichiueda/ubuntu22.04-ros2)-ryuichiueda
 
 ### 参考資料
