@@ -10,6 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build and test
+        shell: bash
         run: |
           rsync -av ./ /root/ros2_ws/src/last_updated/
           cd /root/ros2_ws
