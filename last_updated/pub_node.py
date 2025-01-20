@@ -2,7 +2,6 @@
 # SPDX-FileCopyrightText: 2025 Kazuya Ochiai
 # SPDX-License-Identifier: BSD-3-Clause
 
-
 import os
 import sys
 from datetime import datetime
