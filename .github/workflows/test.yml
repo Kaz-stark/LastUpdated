@@ -14,6 +14,7 @@ jobs:
         run: |
           rsync -av ./ /root/ros2_ws/src/last_updated/
           cd /root/ros2_ws
-          . /opt/ros/humble/setup.bash
+          source /opt/ros/humble/setup.bash
+          chmod +x src/last_updated/test/test.bash
           colcon build
           ./src/last_updated/test/test.bash /root
