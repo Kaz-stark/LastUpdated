@@ -6,10 +6,10 @@
 
 # 対応環境  
 - OS  
--- Ubuntu 22.04.1 LTS  
+    +Ubuntu 22.04.1 LTS  
 
-- OS
--- ROS 2 Humble  
+- ROS2  
+    +ROS 2 Humble  
 
 # 使い方  
 ```
