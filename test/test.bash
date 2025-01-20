@@ -15,6 +15,7 @@ source $dir/.bashrc
 ros2 run last_updated pub_node > test_publish.log 2>&1 & PUB_PID=$!
 sleep 6
 kill $PUB_PID
+cat test_publish.log
 if grep -q "Monitoring LINE updates at:" test_publish.log; then
   echo "Published test passed"
 else
