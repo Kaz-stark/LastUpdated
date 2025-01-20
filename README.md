@@ -6,10 +6,10 @@
 
 # 対応環境  
 - OS  
-    -Ubuntu 22.04.1 LTS  
+    --- Ubuntu 22.04.1 LTS  
 
 - ROS2  
-    -ROS 2 Humble  
+    -- ROS 2 Humble  
 
 # 使い方  
 ```
@@ -32,4 +32,4 @@ data:
 
 
 # 使用させていただいたコンテナ  
-- [ryuichiueda/ubuntu22.04-ros2:latest]-ryuichiueda
+- [ryuichiueda/ubuntu22.04-ros2:latest](https://hub.docker.com/r/ryuichiueda/ubuntu22.04-ros2)-ryuichiueda
