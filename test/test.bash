@@ -19,13 +19,23 @@ source $dir/.bashrc
 ros2 run last_updated pub_node > test_publish.log 2>&1 & PUB_PID=$!
 sleep 6
 kill $PUB_PID
+# ログの内容を表示(デバッグ用)
+echo "=== Log Contents ==="
 cat test_publish.log
+echo "==================="
+
 if grep -q "Monitoring LINE updates at:" test_publish.log; then
   echo "Published test passed"
 else
   echo "failed publish test"
+  echo "Log dose not contain expected message"
   exit 1
 fi
+
+
+
+# テスト実行前にログファイルが存在する場合は削除
+rm -f test_publish.log
 
 # 無効なパスでのテスト
 export TEST_INVALID_PATH="/dummy/path/LINE"
