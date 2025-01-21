@@ -6,6 +6,10 @@
 dir=~
 [ "$1" != "" ] && dir="$1"
 
+# テスト用のダミーファイルとディレクトリを作成
+mkdir -p /root/AppData/Local/LINE/bin
+touch /root/AppData/Local/LINE/bin/LineLauncher.exe
+
 # ビルドと環境設定
 cd $dir/ros2_ws
 colcon build
