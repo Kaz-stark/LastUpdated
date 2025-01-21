@@ -1,5 +1,5 @@
 # LastUpdated
-[![test](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml/badge.svg)](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml)  
+[![test](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml/badge.svg)](https://github.com/Kaz-stark/LastUpdated/actions/workflows/test.yml)  [![GitHub License](https://img.shields.io/github/license/KobayashiYusei/numberGuesser)](LICENSE) <img src="https://img.shields.io/badge/ -Python-F9DC3E.svg?logo=python">
 
 ## 概要
 - LastUpdatedは課題2のために作られたコマンドです。  
