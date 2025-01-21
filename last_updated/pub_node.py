@@ -36,11 +36,21 @@ class LineUpdateMonitorNode(Node):
     
     def _get_line_path(self) -> Path:
         """OneDriveのパスからLINEアプリケーションのパスを返す"""
+        system = platform.system()
         home = Path.home()
         
-        # OneDriveパスの構築
-        onedrive_path = home / 'OneDrive' / '和也ー個人用' / 'デスクトップ' / 'LINE'
-        
+    if system == 'Windows':
+        # Windowsの場合のパス
+        return Path(home) / 'AppData' / 'Local' / 'LINE' / 'bin' / 'LineLauncher.exe'
+    elif system == 'Linux':
+        # Linuxのテスト環境用のパス
+        return Path('/root/AppData/Local/LINE/bin/LineLauncher.exe')
+    elif system == 'Darwin':  # macOS
+        return Path('/Applications/LINE.app')
+    
+    # デフォルトパス
+    return Path(home) / 'AppData' / 'Local' / 'LINE' / 'bin' / 'LineLauncher.exe'  
+
         # パスの存在確認とデバッグ情報の出力
         self.get_logger().info(f'Checking LINE at: {onedrive_path}')
         
